@@ -136,7 +136,7 @@ namespace Ornek2
             };
             db.Products.Add(p);
             db.SaveChanges();
-            dgvSonuclar.DataSource = db.Products.Where(x=> x.CategoryID==kategoriID).ToList();
+            dgvSonuclar.DataSource = db.Products.Where(x=> x.CategoryID==kategoriID && x.ProductName.StartsWith("k")).ToList();
 
 
 
