@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornek1", "Ornek1\Ornek1.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornek2", "Ornek2\Ornek2.csproj", "{B2A47E61-8266-41BD-864A-769A9ED2BA09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBFirst_TelefonRehberiUygulamasi", "DBFirst_TelefonRehberiUygulamasi\DBFirst_TelefonRehberiUygulamasi.csproj", "{F2F9F96F-71C0-496B-A11F-78DC1944ADA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B2A47E61-8266-41BD-864A-769A9ED2BA09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2A47E61-8266-41BD-864A-769A9ED2BA09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2A47E61-8266-41BD-864A-769A9ED2BA09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F9F96F-71C0-496B-A11F-78DC1944ADA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F9F96F-71C0-496B-A11F-78DC1944ADA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F9F96F-71C0-496B-A11F-78DC1944ADA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F9F96F-71C0-496B-A11F-78DC1944ADA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

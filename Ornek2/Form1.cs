@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.SqlServer;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -120,36 +121,92 @@ namespace Ornek2
         private void Btn4_Click(object sender, EventArgs e)
         {   // Kategorisi Beverages olan ve ürün adı Kola, ÜrünFiyatı 5 stok adedi 500 olan bir ürün ekleyiniz.
 
-            int kategoriID = db.Categories.Where(x => x.CategoryName == "Beverages").FirstOrDefault().CategoryID;
+            //  int kategoriID = db.Categories.Where(x => x.CategoryName == "Beverages").FirstOrDefault().CategoryID;
             //  single()
             //  SingleOrDefault()
             //  First()
             //  FirstOrDefault()
 
-            Product p = new Product()
-            {
-                CategoryID = kategoriID,
-                ProductName = "Kola1",
-                UnitPrice = 5,
-                UnitsInStock = 500
+            int kategoriID = db.Categories.FirstOrDefault(x => x.CategoryName == "Beverages").CategoryID;
 
-            };
-            db.Products.Add(p);
+
+            //Product p = new Product()
+            //{
+            //    CategoryID = kategoriID,
+            //    ProductName = "Kola1",
+            //    UnitPrice = 5,
+            //    UnitsInStock = 500
+
+            //};
+            //db.Products.Add(p);
+
+
+
+            ////  2.YoL 
+            //db.Products.Add(new Product() { CategoryID = kategoriID, ProductName = "Kola2", UnitPrice = 5, UnitsInStock = 500 });
+
+
+            // 3.YoL
+            db.Categories.FirstOrDefault(x => x.CategoryName == "Bavereges").Products.Add(new Product() { ProductName = "Kola 3 ", UnitPrice = 5, UnitsInStock = 500 });
+
             db.SaveChanges();
-            dgvSonuclar.DataSource = db.Products.Where(x=> x.CategoryID==kategoriID && x.ProductName.StartsWith("k")).ToList();
-
+            dgvSonuclar.DataSource = db.Products.Where(x => x.CategoryID == kategoriID && x.ProductName.StartsWith("k")).ToList();
 
 
 
         }
 
         private void Btn5_Click(object sender, EventArgs e)
-        {
+        {   //  Her kategorinin stoktaki toplam ürün sayısını veren sorguyu yazınız.
+            dgvSonuclar.DataSource = db.Products.GroupBy(p => p.Category.CategoryName).Select(g => new
+            {
+                KategoriAdi = g.Key,
+                //Test=g.Max(u => u.UnitPrice),
+                ToplamStok = g.Sum(p => p.UnitsInStock)
+            }).ToList();
+
+
+            // 2. YoL
+            var result = from p in db.Products
+                         group p by p.Category.CategoryName into g
+                         select new
+                         {
+                             Kategori = g.Key,
+                             ToplamStok = g.Sum(p => p.UnitsInStock)
+                         };
+            dgvSonuclar.DataSource = result.ToList();
+
+
+
+
 
         }
 
         private void Btn6_Click(object sender, EventArgs e)
-        {
+        { // Calisanaların isim soyisim doğumtarihi ve yaşlıların datediff kullanarak listeleyiniz..
+            dgvSonuclar.DataSource = db.Employees.Select(emp => new
+            {
+                emp.FirstName,
+                emp.LastName,
+                emp.BirthDate,
+                Yas = SqlFunctions.DateDiff("year", emp.BirthDate, DateTime.Now)
+            }).ToList();
+
+
+
+            // 2. YoL
+            var result = from x in db.Employees
+                         select new
+                         {
+                             x.FirstName,
+                             x.LastName,
+                             x.BirthDate,
+                             Yas = SqlFunctions.DateDiff("year", x.BirthDate, DateTime.Now)
+
+                         };
+            dgvSonuclar.DataSource = result.ToList();
+
+
 
         }
 
