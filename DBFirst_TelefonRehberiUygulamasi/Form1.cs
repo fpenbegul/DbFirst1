@@ -68,7 +68,6 @@ namespace DBFirst_TelefonRehberiUygulamasi
                 Kisiler kisi = new Kisiler();
                 kisi.Ad = txtAd.Text;
                 kisi.Soyad = txtSoyad.Text;
-                kisi.Telefon = txtTelefon.Text;
                 db.Kisilers.Add(kisi);
                 bool sonuc = db.SaveChanges() > 0;
 
@@ -137,10 +136,6 @@ namespace DBFirst_TelefonRehberiUygulamasi
             txtTelefon.Text = guncellenecek.Telefon;
             btnGuncelle.Enabled = true;
             btnEkle.Enabled = btnAra.Enabled = false;
-
-
-
-
         }
 
         private void TsmSil_Click(object sender, EventArgs e)
